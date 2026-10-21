@@ -57,10 +57,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout unity-builder
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Checkout orchestrator
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: game-ci/orchestrator
           ref: ${{ github.head_ref || github.ref_name }}
@@ -70,7 +70,7 @@ jobs:
 
       - name: Fallback to orchestrator main branch
         if: steps.orchestrator-branch.outcome == 'failure'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: game-ci/orchestrator
           path: orchestrator-standalone
