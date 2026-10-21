@@ -23,7 +23,7 @@ jobs:
       matrix: ${{ steps.parse.outputs.matrix }}
       plugin_count: ${{ steps.parse.outputs.count }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Parse plugin registry
         id: parse
@@ -73,7 +73,7 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.load-plugins.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Create test project
         run: |
@@ -142,7 +142,7 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Generate summary
         uses: actions/github-script@v7
