@@ -11,7 +11,6 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as core from '@actions/core';
-import * as github from '@actions/github';
 import axios, { isAxiosError } from 'axios';
 import * as exec from '@actions/exec';
 import { buildCliArgs } from './build-args';
@@ -19,7 +18,14 @@ import { downloadCli } from './download-cli';
 import { resolveProjectPath } from './resolve-project-path';
 
 async function validateSubscription() {
-  const repoPrivate = github.context?.payload?.repository?.private;
+  const eventPath = process.env.GITHUB_EVENT_PATH;
+  let repoPrivate: boolean | undefined;
+
+  if (eventPath && fs.existsSync(eventPath)) {
+    const eventData = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+    repoPrivate = eventData?.repository?.private;
+  }
+
   const upstream = 'game-ci/unity-builder';
   const action = process.env.GITHUB_ACTION_REPOSITORY;
   const docsUrl = 'https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions';

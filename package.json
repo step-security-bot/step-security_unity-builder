@@ -31,7 +31,6 @@
     "@actions/cache": "^5.0.0",
     "@actions/core": "^2.0.0",
     "@actions/exec": "^2.0.0",
-    "@actions/github": "^8.0.0",
     "axios": "^1.20.0"
   },
   "devDependencies": {
